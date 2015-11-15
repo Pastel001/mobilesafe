@@ -1,9 +1,12 @@
 package com.dwl.mobilesafe;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -24,6 +27,23 @@ public class HomeActivity extends Activity {
 		setContentView(R.layout.activity_home);
 		gv_home = (GridView) findViewById(R.id.gv_home);
 		gv_home.setAdapter(new HomeAdapter());
+		gv_home.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				switch (position) {
+				case 8:
+					Intent intent = new Intent(HomeActivity.this, SettingActivity.class);
+					startActivity(intent);
+					break;
+
+				default:
+					break;
+				}
+			}
+
+		});
 	}
 
 	private class HomeAdapter extends BaseAdapter {
@@ -35,7 +55,8 @@ public class HomeActivity extends Activity {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			View v = View.inflate(HomeActivity.this, R.layout.list_homepage_item, null);
+			View v = View.inflate(HomeActivity.this,
+					R.layout.list_homepage_item, null);
 			ImageView iv_icon = (ImageView) v.findViewById(R.id.iv_home_item);
 			TextView tv_name = (TextView) v.findViewById(R.id.tv_home_item);
 			iv_icon.setImageResource(icon[position]);
