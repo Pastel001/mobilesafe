@@ -199,7 +199,10 @@ public class SplashActivity extends Activity {
 					URL url = new URL(getString(R.string.updateURL));
 					HttpURLConnection conn = (HttpURLConnection) url
 							.openConnection();
-					conn.setReadTimeout(5000);
+					//setConnectTimeout：设置连接主机超时（单位：毫秒）
+					//setReadTimeout：设置从主机读取数据超时（单位：毫秒）
+					conn.setConnectTimeout(5000);
+					//conn.setReadTimeout(5000);
 					conn.setRequestMethod("GET");
 					int resultCode = conn.getResponseCode();
 					if (resultCode == 200) {
