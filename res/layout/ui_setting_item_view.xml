@@ -9,7 +9,6 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="13dip"
         android:layout_marginTop="8dip"
-        android:text="设置自动检查更新"
         android:textSize="20sp" />
 
     <TextView

@@ -17,7 +17,7 @@
         android:id="@+id/siv_update"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        dwl:title="自动检测更新"
+        dwl:title="设置自动检测更新"
         dwl:desc_on="自动检测更新已经打开"
         dwl:desc_off="自动检测更新已经关闭" />
 
