@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dwl="http://schemas.android.com/apk/res/com.dwl.mobilesafe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -15,6 +16,9 @@
     <com.dwl.mobilesafe.ui.SettingItemView
         android:id="@+id/siv_update"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        dwl:title="自动检测更新"
+        dwl:desc_on="自动检测更新已经打开"
+        dwl:desc_off="自动检测更新已经关闭" />
 
 </LinearLayout>

@@ -19,7 +19,6 @@
         android:layout_below="@id/tv_title"
         android:layout_marginLeft="13dip"
         android:layout_marginTop="4dip"
-        android:text="自动更新已关闭"
         android:textColor="#88000000"
         android:textSize="15sp" />
 
