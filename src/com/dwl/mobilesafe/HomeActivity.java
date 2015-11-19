@@ -1,5 +1,7 @@
 package com.dwl.mobilesafe;
 
+import com.dwl.mobilesafe.utils.Md5utils;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -102,7 +104,7 @@ public class HomeActivity extends Activity {
 				}
 				if (pwd.equals(pwd_confirm)) {
 					Editor editor = sp.edit();
-					editor.putString("password", pwd);
+					editor.putString("password", Md5utils.encode(pwd));
 					editor.commit();
 					dialog.dismiss();
 					Log.i(TAG, "设置成功，进入手机防盗页面");
@@ -141,7 +143,7 @@ public class HomeActivity extends Activity {
 					Toast.makeText(HomeActivity.this, "密码不能为空", 0).show();
 					return;
 				}
-				if (pwd.equals(pwd_confirm)) {
+				if (Md5utils.encode(pwd).equals(pwd_confirm)) {
 					dialog.dismiss();
 					Log.i(TAG, "设置成功，进入手机防盗页面");
 				} else {
