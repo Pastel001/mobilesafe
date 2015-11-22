@@ -3,7 +3,6 @@ package com.dwl.mobilesafe;
 import com.dwl.mobilesafe.ui.SettingItemView;
 
 import android.app.Activity;
-import android.app.backup.SharedPreferencesBackupHelper;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;

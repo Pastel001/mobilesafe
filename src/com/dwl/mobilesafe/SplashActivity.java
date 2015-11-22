@@ -93,7 +93,7 @@ public class SplashActivity extends Activity {
 		tv_splash_progress = (TextView) findViewById(R.id.tv_splash_progress);
 		tv_splash_version.setText("°æ±¾ºÅ£º" + getVersion());
 		sp = getSharedPreferences("config", MODE_PRIVATE);
-		boolean update = sp.getBoolean("update", true);
+		boolean update = sp.getBoolean("update", false);
 		if (update) {
 			checkUpdate();
 		}else {

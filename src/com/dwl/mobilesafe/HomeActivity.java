@@ -5,11 +5,9 @@ import com.dwl.mobilesafe.utils.Md5utils;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -108,6 +106,8 @@ public class HomeActivity extends Activity {
 					editor.commit();
 					dialog.dismiss();
 					Log.i(TAG, "设置成功，进入手机防盗页面");
+					Intent intent = new Intent(getApplicationContext(),LostFindAcitvity.class);
+					startActivity(intent);
 				} else {
 					Toast.makeText(HomeActivity.this, "密码不一致", 0).show();
 					return;
@@ -140,12 +140,14 @@ public class HomeActivity extends Activity {
 				String pwd = et_password.getText().toString().trim();
 				String pwd_confirm = sp.getString("password", null);
 				if (TextUtils.isEmpty(pwd)) {
-					Toast.makeText(HomeActivity.this, "密码不能为空", 0).show();
+					Toast.makeText(getApplicationContext(), "密码不能为空", 0).show();
 					return;
 				}
 				if (Md5utils.encode(pwd).equals(pwd_confirm)) {
 					dialog.dismiss();
 					Log.i(TAG, "设置成功，进入手机防盗页面");
+					Intent intent = new Intent(HomeActivity.this,LostFindAcitvity.class);
+					startActivity(intent);
 				} else {
 					Toast.makeText(HomeActivity.this, "密码不一致", 0).show();
 					return;
