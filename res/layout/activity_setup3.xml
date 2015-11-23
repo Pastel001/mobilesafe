@@ -21,7 +21,7 @@
         android:hint="请输入或者选择安全号码" />
 
     <Button
-       android:background="@drawable/selector_btn_green"
+        android:background="@drawable/selector_btn_green"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="selectContact"

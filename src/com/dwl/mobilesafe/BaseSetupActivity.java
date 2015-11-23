@@ -1,6 +1,7 @@
 package com.dwl.mobilesafe;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -8,10 +9,13 @@ import android.view.View;
 
 public abstract class BaseSetupActivity extends Activity {
 	protected GestureDetector gesDetector;
+	protected SharedPreferences sp;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		sp = getSharedPreferences("config", MODE_PRIVATE);
 		gesDetector = new GestureDetector(this,
 				new GestureDetector.SimpleOnGestureListener() {
 					/**
