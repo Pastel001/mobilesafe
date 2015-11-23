@@ -20,14 +20,15 @@ public abstract class BaseSetupActivity extends Activity {
 					@Override
 					public boolean onFling(MotionEvent e1, MotionEvent e2,
 							float velocityX, float velocityY) {
+						System.out.println();
 						// 从右向左滑动，显示下一个页面
-						if (e1.getX() - e2.getY() > 100) {
+						if (e1.getX() - e2.getX() > 100) {
 							System.out.println("从右向左滑动，显示下一个页面");
 							showNext();
 							return true;
 						}
 						// 从左向右滑动，显示上一个页面
-						if (e2.getX() - e1.getY() > 100) {
+						if (e2.getX() - e1.getX() > 100) {
 							System.out.println("从左向右滑动，显示上一个页面");
 							showPre();
 							return true;
@@ -54,6 +55,7 @@ public abstract class BaseSetupActivity extends Activity {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
 		gesDetector.onTouchEvent(event);
+		System.out.println("BaseActivity--onTouchEvent");
 		return super.onTouchEvent(event);
 	}
 }
