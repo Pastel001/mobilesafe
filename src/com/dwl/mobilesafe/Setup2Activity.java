@@ -35,8 +35,12 @@ public class Setup2Activity extends BaseSetupActivity {
 				Editor editor = sp.edit();
 				if (TextUtils.isEmpty(result)) {
 					String number = tm.getSimSerialNumber();
-					editor.putString("sim", number);
-					editor.commit();
+					System.out.println(number);
+					if (number != null) {
+						editor.putString("sim", number);
+						System.out.println("fuck");
+						editor.commit();
+					}
 					siv_setup2_bindsim.setChecked(true);
 				} else {
 					editor.putString("sim", null);
