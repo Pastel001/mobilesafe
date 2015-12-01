@@ -1,4 +1,4 @@
-package com.dwl.mobillesafe.receiver;
+package com.dwl.mobilesafe.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
