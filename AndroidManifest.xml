@@ -44,6 +44,10 @@
         </activity>
         <activity android:name="com.dwl.mobilesafe.SelectContactActivity" >
         </activity>
+        <activity android:name="com.dwl.mobilesafe.AtoolsActivity" >
+        </activity>
+        <activity android:name="com.dwl.mobilesafe.NumberAddressQuery" >
+        </activity>
 
         <receiver android:name="com.dwl.mobillesafe.receiver.BootCompleteReceiver" >
             <intent-filter>
@@ -57,7 +61,7 @@
                 </action>
             </intent-filter>
         </receiver>
-        <!--lock screen-->
+        <!-- lock screen -->
         <receiver
             android:name="com.dwl.mobilesafe.MyAdmin"
             android:description="@string/sample_device_admin_description"

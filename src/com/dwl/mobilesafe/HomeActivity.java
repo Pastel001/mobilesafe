@@ -48,12 +48,18 @@ public class HomeActivity extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				Intent intent;
 				switch (position) {
 				case 0:// 手机防盗
 					showLostFindDialog();
 					break;
+				case 7:// 高级工具
+					intent = new Intent(HomeActivity.this,
+							AtoolsActivity.class);
+					startActivity(intent);
+					break;
 				case 8:// 设置中心
-					Intent intent = new Intent(HomeActivity.this,
+					intent = new Intent(HomeActivity.this,
 							SettingActivity.class);
 					startActivity(intent);
 					break;
@@ -106,7 +112,8 @@ public class HomeActivity extends Activity {
 					editor.commit();
 					dialog.dismiss();
 					Log.i(TAG, "设置成功，进入手机防盗页面");
-					Intent intent = new Intent(getApplicationContext(),LostFindAcitvity.class);
+					Intent intent = new Intent(getApplicationContext(),
+							LostFindAcitvity.class);
 					startActivity(intent);
 				} else {
 					Toast.makeText(HomeActivity.this, "密码不一致", 0).show();
@@ -146,7 +153,8 @@ public class HomeActivity extends Activity {
 				if (Md5utils.encode(pwd).equals(pwd_confirm)) {
 					dialog.dismiss();
 					Log.i(TAG, "设置成功，进入手机防盗页面");
-					Intent intent = new Intent(HomeActivity.this,LostFindAcitvity.class);
+					Intent intent = new Intent(HomeActivity.this,
+							LostFindAcitvity.class);
 					startActivity(intent);
 				} else {
 					Toast.makeText(HomeActivity.this, "密码不一致", 0).show();
