@@ -13,7 +13,6 @@
         android:textSize="20sp" />
     <EditText 
         android:id="@+id/et_number"
-        android:background="@drawable/button"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"

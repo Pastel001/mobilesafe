@@ -1,6 +1,7 @@
 package com.dwl.mobilesafe;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -24,6 +25,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -94,9 +96,11 @@ public class SplashActivity extends Activity {
 		tv_splash_version.setText("版本号：" + getVersion());
 		sp = getSharedPreferences("config", MODE_PRIVATE);
 		boolean update = sp.getBoolean("update", false);
+		// 初始化，拷贝数据库到fils目录
+		copyDB();
 		if (update) {
 			checkUpdate();
-		}else {
+		} else {
 			handler.postDelayed(new Runnable() {
 				public void run() {
 					enterHome();
@@ -106,6 +110,28 @@ public class SplashActivity extends Activity {
 		AlphaAnimation aa = new AlphaAnimation(0.3f, 1.0f);
 		aa.setDuration(2000);
 		findViewById(R.id.rl_splash_root).startAnimation(aa);
+	}
+
+	private void copyDB() {
+		File file = new File(getFilesDir(),"address.db");
+		if (file.exists() && file.length() > 0) {
+			Log.i(TAG, "数据库已经存在，不需要重新拷贝");
+		} else {
+			AssetManager am = getAssets();
+			try {
+				InputStream is = am.open("address.db");
+				FileOutputStream fos = new FileOutputStream(file);
+				byte[] buffer = new byte[1024];
+				int len = 0;
+				while ((len = is.read(buffer)) != -1) {
+					fos.write(buffer, 0, len);
+				}
+				fos.close();
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	protected void showUpdateDialog() {
@@ -160,8 +186,9 @@ public class SplashActivity extends Activity {
 									intent.addCategory("android.intent.category.DEFAULT");
 									intent.setDataAndType(Uri.fromFile(t),
 											"application/vnd.android.package-archive");
-									//startActivity(intent);
-									startActivityForResult(intent,UPDATE_INSTALL);
+									// startActivity(intent);
+									startActivityForResult(intent,
+											UPDATE_INSTALL);
 								}
 							});
 				} else {
@@ -187,8 +214,8 @@ public class SplashActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		Log.i(TAG, String.valueOf(resultCode));
-		//判断本地安装失败,安装失败进入首页
-		//系统安装页面关闭返回0，安装包解析错误1
+		// 判断本地安装失败,安装失败进入首页
+		// 系统安装页面关闭返回0，安装包解析错误1
 		if (requestCode == UPDATE_INSTALL && resultCode != 2) {
 			enterHome();
 		}
@@ -211,10 +238,10 @@ public class SplashActivity extends Activity {
 					URL url = new URL(getString(R.string.updateURL));
 					HttpURLConnection conn = (HttpURLConnection) url
 							.openConnection();
-					//setConnectTimeout：设置连接主机超时（单位：毫秒）
-					//setReadTimeout：设置从主机读取数据超时（单位：毫秒）
+					// setConnectTimeout：设置连接主机超时（单位：毫秒）
+					// setReadTimeout：设置从主机读取数据超时（单位：毫秒）
 					conn.setConnectTimeout(5000);
-					//conn.setReadTimeout(5000);
+					// conn.setReadTimeout(5000);
 					conn.setRequestMethod("GET");
 					int resultCode = conn.getResponseCode();
 					if (resultCode == 200) {
