@@ -22,6 +22,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -36,6 +37,8 @@ import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dwl.mobilesafe.service.AddressService;
+import com.dwl.mobilesafe.utils.ServiceStatusUtils;
 import com.dwl.mobilesafe.utils.StreamTools;
 
 public class SplashActivity extends Activity {
@@ -49,6 +52,7 @@ public class SplashActivity extends Activity {
 	private TextView tv_splash_version;
 	private TextView tv_splash_progress;
 	private SharedPreferences sp;
+	private Editor editor;
 	/**
 	 * 升级地址path
 	 */
@@ -96,6 +100,7 @@ public class SplashActivity extends Activity {
 		tv_splash_version.setText("版本号：" + getVersion());
 		sp = getSharedPreferences("config", MODE_PRIVATE);
 		boolean update = sp.getBoolean("update", false);
+		editor = sp.edit();
 		// 初始化，拷贝数据库到fils目录
 		copyDB();
 		if (update) {
@@ -110,10 +115,30 @@ public class SplashActivity extends Activity {
 		AlphaAnimation aa = new AlphaAnimation(0.3f, 1.0f);
 		aa.setDuration(2000);
 		findViewById(R.id.rl_splash_root).startAnimation(aa);
+		//默认开启归属地号码显示
+		Intent service = new Intent(this, AddressService.class);
+		if (sp.contains("showAddress")) {
+			if (sp.getBoolean("showAddress", false)) {
+				if (!ServiceStatusUtils.isServiceRunning(this,
+						"com.dwl.mobilesafe.service.AddressService")) {
+					startService(service);
+				}
+			}
+		} else {
+			System.out.println("dont not");
+			if (ServiceStatusUtils.isServiceRunning(this,
+					"com.dwl.mobilesafe.service.AddressService")) {
+			}else {
+				startService(service);
+				System.out.println("start");
+			}
+			editor.putBoolean("showAddress", true);
+		}
+		editor.commit();
 	}
 
 	private void copyDB() {
-		File file = new File(getFilesDir(),"address.db");
+		File file = new File(getFilesDir(), "address.db");
 		if (file.exists() && file.length() > 0) {
 			Log.i(TAG, "数据库已经存在，不需要重新拷贝");
 		} else {
