@@ -21,13 +21,15 @@
         android:textColor="#88000000"
         android:textSize="15sp" />
 
-    <ImageView
+    <CheckBox
+        android:id="@+id/cb_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="6dip"
-        android:src="@drawable/jiantou1_pressed" />
+        android:clickable="false"
+        android:focusable="false" />
 
     <View
         android:layout_width="fill_parent"

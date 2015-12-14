@@ -49,6 +49,8 @@
         </activity>
         <activity android:name="com.dwl.mobilesafe.NumberAddressQuery" >
         </activity>
+        <activity android:name="com.dwl.mobilesafe.DragViewActivity" >
+        </activity>
 
         <service android:name="com.dwl.mobilesafe.service.GPSService" >
         </service>

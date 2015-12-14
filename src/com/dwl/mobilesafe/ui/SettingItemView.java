@@ -1,7 +1,5 @@
 package com.dwl.mobilesafe.ui;
 
-
-
 import com.dwl.mobilesafe.R;
 
 import android.content.Context;
@@ -50,7 +48,6 @@ public class SettingItemView extends RelativeLayout {
 				"desc_off");
 		tv_title.setText(title);
 		tv_desc.setText(desc_off);
-
 	}
 
 	public SettingItemView(Context context) {

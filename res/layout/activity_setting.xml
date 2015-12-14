@@ -30,7 +30,11 @@
         dwl:title="设置是否显示号码归属地" />
 
     <com.dwl.mobilesafe.ui.SettingClickView
-        android:id="@+id/scv_changebg"
+        android:id="@+id/scv_change_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <com.dwl.mobilesafe.ui.SettingClickView
+        android:id="@+id/scv_change_positon"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

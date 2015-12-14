@@ -72,7 +72,10 @@ public class AddressService extends Service {
 				showMyToast(address);
 				break;
 			case TelephonyManager.CALL_STATE_IDLE:
-				wm.removeView(view);
+				if (view != null) {
+					wm.removeView(view);
+					view = null;
+				}
 				break;
 			}
 
