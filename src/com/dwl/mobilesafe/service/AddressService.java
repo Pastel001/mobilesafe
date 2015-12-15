@@ -13,6 +13,7 @@ import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.WindowManager.LayoutParams;
@@ -96,6 +97,9 @@ public class AddressService extends Service {
 		TextView tv = (TextView) view.findViewById(R.id.tv_location);
 		tv.setText(address);
 		LayoutParams params = new LayoutParams();
+		params.gravity = Gravity.TOP + Gravity.LEFT;
+		params.x = sp.getInt("lastx", 0);
+		params.y = sp.getInt("lasty", 0);
 		params.height = LayoutParams.WRAP_CONTENT;
 		params.width = LayoutParams.WRAP_CONTENT;
 		params.flags = LayoutParams.FLAG_NOT_FOCUSABLE
@@ -103,6 +107,7 @@ public class AddressService extends Service {
 				| LayoutParams.FLAG_KEEP_SCREEN_ON;
 		params.format = PixelFormat.TRANSLUCENT;
 		params.type = LayoutParams.TYPE_TOAST;
+		
 		wm.addView(view, params);
 	}
 
