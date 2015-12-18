@@ -102,7 +102,8 @@ public class SplashActivity extends Activity {
 		boolean update = sp.getBoolean("update", false);
 		editor = sp.edit();
 		// 初始化，拷贝数据库到fils目录
-		copyDB();
+		copyDB("address.db");
+		copyDB("commonnum.db");
 		if (update) {
 			checkUpdate();
 		} else {
@@ -137,14 +138,14 @@ public class SplashActivity extends Activity {
 		editor.commit();
 	}
 
-	private void copyDB() {
-		File file = new File(getFilesDir(), "address.db");
+	private void copyDB(String dbname) {
+		File file = new File(getFilesDir(), dbname);
 		if (file.exists() && file.length() > 0) {
 			Log.i(TAG, "数据库已经存在，不需要重新拷贝");
 		} else {
 			AssetManager am = getAssets();
 			try {
-				InputStream is = am.open("address.db");
+				InputStream is = am.open(dbname);
 				FileOutputStream fos = new FileOutputStream(file);
 				byte[] buffer = new byte[1024];
 				int len = 0;

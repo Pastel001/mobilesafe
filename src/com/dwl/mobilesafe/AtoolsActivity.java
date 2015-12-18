@@ -14,7 +14,12 @@ public class AtoolsActivity extends Activity {
 	}
 
 	public void numberAddressQuery(View view) {
-		Intent intent = new Intent(this, NumberAddressQuery.class);
+		Intent intent = new Intent(this, NumberAddressQueryActivity.class);
+		startActivity(intent);
+	}
+	
+	public void conmonNumberQuery(View view){
+		Intent intent = new Intent(this, CommonNumberQueryActivity.class);
 		startActivity(intent);
 	}
 }

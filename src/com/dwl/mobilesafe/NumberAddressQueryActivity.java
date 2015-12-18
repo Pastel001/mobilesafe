@@ -14,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class NumberAddressQuery extends Activity {
+public class NumberAddressQueryActivity extends Activity {
 	
 	private static final String TAG = "NumberAddressQuery";
 	private EditText et_number;
