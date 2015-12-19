@@ -27,6 +27,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.AssetManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -104,6 +105,8 @@ public class SplashActivity extends Activity {
 		// 初始化，拷贝数据库到fils目录
 		copyDB("address.db");
 		copyDB("commonnum.db");
+		// 创建桌面快捷图标
+		creteDesktopShotcut();
 		if (update) {
 			checkUpdate();
 		} else {
@@ -116,7 +119,7 @@ public class SplashActivity extends Activity {
 		AlphaAnimation aa = new AlphaAnimation(0.3f, 1.0f);
 		aa.setDuration(2000);
 		findViewById(R.id.rl_splash_root).startAnimation(aa);
-		//默认开启归属地号码显示
+		// 默认开启归属地号码显示
 		Intent service = new Intent(this, AddressService.class);
 		if (sp.contains("showAddress")) {
 			if (sp.getBoolean("showAddress", false)) {
@@ -129,13 +132,34 @@ public class SplashActivity extends Activity {
 			System.out.println("dont not");
 			if (ServiceStatusUtils.isServiceRunning(this,
 					"com.dwl.mobilesafe.service.AddressService")) {
-			}else {
+			} else {
 				startService(service);
 				System.out.println("start");
 			}
 			editor.putBoolean("showAddress", true);
 		}
 		editor.commit();
+	}
+
+	private void creteDesktopShotcut() {
+		boolean shotcut = sp.getBoolean("shotcut", false);
+		if (shotcut) {
+			return;
+		}
+		// 创建发给laucnher的广播意图
+		Intent intent = new Intent();
+		intent.setAction("com.android.laucher.action.INSTALL_SHOT");
+		intent.putExtra(Intent.EXTRA_SHORTCUT_NAME, "手机卫士");
+		intent.putExtra(Intent.EXTRA_SHORTCUT_ICON,
+				BitmapFactory.decodeResource(getResources(), R.drawable.safe));
+		// 手机卫士主页的隐式意图
+		Intent homeIntent = new Intent();
+		homeIntent.setAction("com.dwl.mobilesafe.home");
+		homeIntent.addCategory(intent.CATEGORY_DEFAULT);
+		intent.putExtra(Intent.EXTRA_SHORTCUT_INTENT, homeIntent);
+		// 发送广播给launcher，创建快捷图标，shortcut
+		sendBroadcast(intent);
+		editor.putBoolean("shotcut", true);
 	}
 
 	private void copyDB(String dbname) {

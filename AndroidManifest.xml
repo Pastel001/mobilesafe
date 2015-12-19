@@ -15,6 +15,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <application
         android:allowBackup="true"
@@ -31,6 +32,10 @@
             </intent-filter>
         </activity>
         <activity android:name="com.dwl.mobilesafe.HomeActivity" >
+            <intent-filter>
+                <action android:name="com.dwl.mobilesafe.home" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity android:name="com.dwl.mobilesafe.SettingActivity" >
         </activity>
@@ -60,7 +65,7 @@
         <service android:name="com.dwl.mobilesafe.service.AddressService" >
         </service>
 
-        <receiver android:name="com.dwl.mobillesafe.receiver.BootCompleteReceiver" >
+        <receiver android:name="com.dwl.mobilesafe.receiver.BootCompleteReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" >
                 </action>

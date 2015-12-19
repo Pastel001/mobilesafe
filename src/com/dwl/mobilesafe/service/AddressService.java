@@ -14,6 +14,7 @@ import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,6 +24,7 @@ import android.view.WindowManager.LayoutParams;
 import android.widget.TextView;
 
 public class AddressService extends Service {
+	public static final String TAG = "AddressService";
 	private TelephonyManager tm;
 	private PhoneStateListener listener;
 	private OutCallReceiver receiver;
@@ -41,6 +43,7 @@ public class AddressService extends Service {
 			String number = getResultData();
 			String address = AddressDao.getAddress(number);
 			// Toast.makeText(context, number, 1).show();
+			Log.i(TAG, "收到外拨电话广播");
 			showMyToast(address);
 		}
 	}
@@ -53,13 +56,15 @@ public class AddressService extends Service {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		Log.i(TAG, "address service");
+		sp= getSharedPreferences("config", MODE_PRIVATE);
 		wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 		tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
 		listener = new MyListener();
 		tm.listen(listener, PhoneStateListener.LISTEN_CALL_STATE);
 		receiver = new OutCallReceiver();
-		IntentFilter filter = new IntentFilter(
-				"android.intent.action.NEW_OUTGOING_CALL");
+		IntentFilter filter = new IntentFilter();
+		filter.addAction(Intent.ACTION_NEW_OUTGOING_CALL);
 		registerReceiver(receiver, filter);
 	}
 
@@ -150,7 +155,7 @@ public class AddressService extends Service {
 				return true;
 			}
 		});
-		LayoutParams params = new LayoutParams();
+	    params = new LayoutParams();
 		params.gravity = Gravity.TOP + Gravity.LEFT;
 		params.x = sp.getInt("lastx", 0);
 		params.y = sp.getInt("lasty", 0);

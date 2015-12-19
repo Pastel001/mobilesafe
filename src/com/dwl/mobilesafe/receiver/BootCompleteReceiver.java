@@ -7,15 +7,19 @@ import android.content.SharedPreferences;
 import android.telecom.TelecomManager;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
+import android.util.Log;
+import android.widget.Toast;
 
 public class BootCompleteReceiver extends BroadcastReceiver{
+	private static final String TAG = "BootCompleteReceiver";
 	private SharedPreferences sp;
 	private TelephonyManager tm;
     
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		sp = context.getSharedPreferences("config", context.MODE_PRIVATE);
-		
+		//Log.i(TAG, "receive");
+		//Toast.makeText(context.getApplicationContext(), intent.getAction(), 0).show();
 		boolean protecting = sp.getBoolean("protecting", false);
 		if (protecting) {
 			String sim = sp.getString("sim", "");

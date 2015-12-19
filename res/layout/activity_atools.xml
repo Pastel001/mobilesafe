@@ -33,6 +33,6 @@
         android:text="常用号码查询"
         android:clickable="true"
         android:gravity="center_vertical"
-        android:onClick="conmonNumberQuery"
+        android:onClick="commonNumberQuery"
         />
 </LinearLayout>
