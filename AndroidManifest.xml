@@ -8,6 +8,11 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="com.dwl.mobilesafe" >
+    </instrumentation>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -22,6 +27,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <uses-library android:name="android.test.runner" />
+
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name" >
@@ -34,7 +41,8 @@
         <activity android:name="com.dwl.mobilesafe.HomeActivity" >
             <intent-filter>
                 <action android:name="com.dwl.mobilesafe.home" />
-                <category android:name="android.intent.category.DEFAULT" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity android:name="com.dwl.mobilesafe.SettingActivity" >
@@ -58,6 +66,8 @@
         <activity android:name="com.dwl.mobilesafe.DragViewActivity" >
         </activity>
         <activity android:name="com.dwl.mobilesafe.CommonNumberQueryActivity" >
+        </activity>
+        <activity android:name="com.dwl.mobilesafe.CallSmsSafeActivity" >
         </activity>
 
         <service android:name="com.dwl.mobilesafe.service.GPSService" >

@@ -1,6 +1,6 @@
 package com.dwl.mobilesafe;
 
-import com.dwl.mobilesafe.db.CommonNumberDao;
+import com.dwl.mobilesafe.db.dao.CommonNumberDao;
 
 import android.app.Activity;
 import android.content.Intent;

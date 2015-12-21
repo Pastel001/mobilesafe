@@ -1,6 +1,6 @@
 package com.dwl.mobilesafe;
 
-import com.dwl.mobilesafe.db.AddressDao;
+import com.dwl.mobilesafe.db.dao.AddressDao;
 
 import android.app.Activity;
 import android.os.Bundle;

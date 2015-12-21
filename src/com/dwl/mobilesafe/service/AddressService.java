@@ -1,7 +1,7 @@
 package com.dwl.mobilesafe.service;
 
 import com.dwl.mobilesafe.R;
-import com.dwl.mobilesafe.db.AddressDao;
+import com.dwl.mobilesafe.db.dao.AddressDao;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;

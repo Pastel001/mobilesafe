@@ -1,4 +1,4 @@
-package com.dwl.mobilesafe.db;
+package com.dwl.mobilesafe.db.dao;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

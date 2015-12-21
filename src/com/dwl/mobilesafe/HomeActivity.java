@@ -53,9 +53,13 @@ public class HomeActivity extends Activity {
 				case 0:// 手机防盗
 					showLostFindDialog();
 					break;
-				case 7:// 高级工具
+				case 1:// 通讯卫士
 					intent = new Intent(HomeActivity.this,
-							AtoolsActivity.class);
+							CallSmsSafeActivity.class);
+					startActivity(intent);
+					break;
+				case 7:// 高级工具
+					intent = new Intent(HomeActivity.this, AtoolsActivity.class);
 					startActivity(intent);
 					break;
 				case 8:// 设置中心
