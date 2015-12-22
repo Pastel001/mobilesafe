@@ -1,5 +1,7 @@
 package com.dwl.mobilesafe.test;
 
+import java.util.Random;
+
 import com.dwl.mobilesafe.db.BlackNumberDBOpenHelper;
 import com.dwl.mobilesafe.db.dao.BlackNumberDao;
 
@@ -13,7 +15,12 @@ public class TestBlackNumberDB extends AndroidTestCase {
 
 	public void TestAdd() throws Exception {
 		BlackNumberDao dao = new BlackNumberDao(getContext());
-		dao.add("119", "1");
+		long number = 18311049001l;
+		Random random = new Random();
+		for (long i = 0; i < 50; i++) {
+			dao.add(String.valueOf(number + i),
+					String.valueOf(random.nextInt(3) + 1));
+		}
 	}
 
 	public void TestDelete() throws Exception {

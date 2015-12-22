@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="5dip"
+        android:text="电话"
+        android:textColor="#0000ff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/number"
+        android:layout_marginLeft="5dip"
+        android:layout_marginTop="5dip"
+        android:text="拦截模式"
+        android:textColor="#000000"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/btn_selector"
+       />
+
+</RelativeLayout>

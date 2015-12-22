@@ -1,11 +1,15 @@
 package com.dwl.mobilesafe.db.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.dwl.mobilesafe.db.BlackNumberDBOpenHelper;
+import com.dwl.mobilesafe.dto.BlackNumber;
 
 public class BlackNumberDao {
 	private BlackNumberDBOpenHelper helper;
@@ -102,6 +106,35 @@ public class BlackNumberDao {
 		cursor.close();
 		db.close();
 		return mode;
+	}
+
+	/**
+	 * 查询全部黑名单
+	 * 
+	 * @return
+	 */
+	public List<BlackNumber> findAll() {
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<BlackNumber> list = new ArrayList<BlackNumber>();
+		SQLiteDatabase db = helper.getReadableDatabase();
+		Cursor cursor = db
+				.query("blacknumber", new String[] { "number", "mode" }, null,
+						null, null, null, null);
+		while (cursor.moveToNext()) {
+			BlackNumber blackNumber = new BlackNumber();
+			String number = cursor.getString(0);
+			String mode = cursor.getString(1);
+			blackNumber.setNumber(number);
+			blackNumber.setMode(mode);
+			list.add(blackNumber);
+		}
+		cursor.close();
+		db.close();
+		return list;
 	}
 
 }

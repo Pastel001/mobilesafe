@@ -26,8 +26,7 @@
 
     <FrameLayout
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" 
-        android:visibility="invisible">
+        android:layout_height="fill_parent" >
 
         <ListView
             android:id="@+id/lv_call_sms_safe"
@@ -36,10 +35,12 @@
         </ListView>
 
         <LinearLayout
+            android:id="@+id/ll_laoding"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="center"
-            android:orientation="vertical" >
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="invisible" >
 
             <ProgressBar
                 android:layout_width="wrap_content"
