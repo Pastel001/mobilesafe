@@ -64,17 +64,18 @@ public class CallSmsSafeActivity extends Activity {
 				// TODO Auto-generated method stub
 				switch (scrollState) {
 				case SCROLL_STATE_IDLE:
-					if (list.size() - view.getLastVisiblePosition() <= 3) {// getLastVisiblePosition,listView的开始位置为0
-						if (isloading) {
+					if (offset >= counts) {// 不需要再加载数据，直接return
+						if (list.size() == view.getLastVisiblePosition() + 1) {// 只有当不需要再加载数据，且拉动到最后一个位置时显示没有更多数据
+							Toast.makeText(getApplicationContext(),"没有更多数据了", 0).show();
+							return;
+						}
+						return;
+					}
+					if (list.size() - view.getLastVisiblePosition() <= 3) {// getLastVisiblePosition,listView的开始位置为0，小于3条数据未展示时开始加载
+						if (isloading) {//因为停止时可能是倒数第3个，加载过程中再次停止到第2个，此判断避免fillData同时被执行
 							return;
 						}
 						fillData();
-						if (offset >= counts
-								&& (list.size() == view
-										.getLastVisiblePosition() + 1)) {//只有当不需要再加载数据，且拉动到最后一个位置时显示没有更多数据
-							Toast.makeText(getApplicationContext(), "没有更多数据了",
-									0).show();
-						}
 					}
 					break;
 
@@ -100,9 +101,6 @@ public class CallSmsSafeActivity extends Activity {
 
 	private void fillData() {
 		// 耗时的操作写在子线程
-		if (offset >= counts) {
-			return;
-		}
 		ll_loading.setVisibility(View.VISIBLE);
 		isloading = true;
 		new Thread() {
