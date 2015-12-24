@@ -137,4 +137,49 @@ public class BlackNumberDao {
 		return list;
 	}
 
+	/**
+	 * 查询部分数据
+	 * 
+	 * @param count
+	 *            本次查询数量
+	 * @param offset
+	 *            从表中开始查询的位置（偏移量）
+	 * @return
+	 */
+	public List<BlackNumber> findPart(int count, int offset) {
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		List<BlackNumber> list = new ArrayList<BlackNumber>();
+		SQLiteDatabase db = helper.getReadableDatabase();
+		Cursor cursor = db.rawQuery(
+				"select number,mode from blacknumber limit ? offset ?",
+				new String[] { String.valueOf(count), String.valueOf(offset) });
+		while (cursor.moveToNext()) {
+			BlackNumber blackNumber = new BlackNumber();
+			String number = cursor.getString(0);
+			String mode = cursor.getString(1);
+			blackNumber.setNumber(number);
+			blackNumber.setMode(mode);
+			list.add(blackNumber);
+		}
+		cursor.close();
+		db.close();
+		return list;
+	}
+	/**
+	 * 获取一共有多少条记录
+	 */
+	public int findCount() {
+		SQLiteDatabase db = helper.getReadableDatabase();
+		Cursor cursor = db.rawQuery("select count(*) from blacknumber", null);
+
+		cursor.moveToFirst();
+		int count = cursor.getInt(0);
+		cursor.close();
+		db.close();
+		return count;
+	}
 }
