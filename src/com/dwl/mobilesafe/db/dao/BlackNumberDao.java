@@ -155,7 +155,7 @@ public class BlackNumberDao {
 		List<BlackNumber> list = new ArrayList<BlackNumber>();
 		SQLiteDatabase db = helper.getReadableDatabase();
 		Cursor cursor = db.rawQuery(
-				"select number,mode from blacknumber limit ? offset ?",
+				"select number,mode from blacknumber order by _id desc limit ? offset ?",
 				new String[] { String.valueOf(count), String.valueOf(offset) });
 		while (cursor.moveToNext()) {
 			BlackNumber blackNumber = new BlackNumber();

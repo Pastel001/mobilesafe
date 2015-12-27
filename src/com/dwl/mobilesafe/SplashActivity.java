@@ -127,12 +127,16 @@ public class SplashActivity extends Activity {
 						"com.dwl.mobilesafe.service.AddressService")) {
 					startService(service);
 				}
-			}
-		} else {
-			System.out.println("dont not");
-			if (ServiceStatusUtils.isServiceRunning(this,
-					"com.dwl.mobilesafe.service.AddressService")) {
 			} else {
+				if (ServiceStatusUtils.isServiceRunning(this,
+						"com.dwl.mobilesafe.service.AddressService")) {
+					stopService(service);
+				}
+
+			}
+		} else {// 首次进入，开启服务
+			if (!ServiceStatusUtils.isServiceRunning(this,
+					"com.dwl.mobilesafe.service.AddressService")) {
 				startService(service);
 				System.out.println("start");
 			}

@@ -1,6 +1,7 @@
 package com.dwl.mobilesafe;
 
 import com.dwl.mobilesafe.service.AddressService;
+import com.dwl.mobilesafe.service.CallSmsSafeService;
 import com.dwl.mobilesafe.ui.SettingClickView;
 import com.dwl.mobilesafe.ui.SettingItemView;
 import com.dwl.mobilesafe.utils.ServiceStatusUtils;
@@ -26,6 +27,7 @@ public class SettingActivity extends Activity {
 	private SettingItemView siv_address;
 	private SettingClickView scv_change_bg;
 	private SettingClickView scv_change_postion;
+	private SettingItemView siv_black_number;
 	/**
 	 * 起始位置
 	 */
@@ -34,6 +36,7 @@ public class SettingActivity extends Activity {
 	private SharedPreferences sp;
 	private Editor editor;
 	private Intent showAddresService;
+	private Intent callSmsSafeService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class SettingActivity extends Activity {
 		siv_address = (SettingItemView) findViewById(R.id.siv_address);
 		scv_change_bg = (SettingClickView) findViewById(R.id.scv_change_bg);
 		scv_change_postion = (SettingClickView) findViewById(R.id.scv_change_positon);
+		siv_black_number = (SettingItemView) findViewById(R.id.siv_black_number);
 		// 自动更新设置
 		if (update) {
 			siv_update.setChecked(true);
@@ -75,7 +79,6 @@ public class SettingActivity extends Activity {
 		} else {
 			siv_address.setChecked(false);
 		}
-		editor.commit();
 		showAddresService = new Intent(this, AddressService.class);
 		siv_address.setOnClickListener(new OnClickListener() {
 			@Override
@@ -128,6 +131,24 @@ public class SettingActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(SettingActivity.this,DragViewActivity.class);
 				startActivity(intent);
+			}
+		});
+		//黑名单拦截设置
+		if (ServiceStatusUtils.isServiceRunning(this,
+				"com.dwl.mobilesafe.service.CallSmsSafeService")) {
+			siv_black_number.setChecked(true);
+		} else {
+			siv_black_number.setChecked(false);
+		}
+		callSmsSafeService = new Intent(this, CallSmsSafeService.class);
+		siv_black_number.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (siv_black_number.isChecked()) {
+					siv_black_number.setChecked(false);
+				} else {
+					siv_black_number.setChecked(true);
+				}
 			}
 		});
 	}
