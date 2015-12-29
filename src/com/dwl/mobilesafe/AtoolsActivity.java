@@ -65,7 +65,34 @@ public class AtoolsActivity extends Activity {
 		}
 	}
 	public void smsRecovery(View view){
-		
-		
+		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+			final File file = new File(Environment.getExternalStorageDirectory(), "smsBackup.xml");
+			final ProgressDialog pd = new ProgressDialog(AtoolsActivity.this);
+			pd.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+			pd.setMessage("恢复中...");
+			pd.show();
+			new Thread(){
+				public void run() {
+					try {
+						SmsTools.smsRecovery(AtoolsActivity.this, file.getAbsolutePath(),new SmsDoingCallBack() {
+							@Override
+							public void onBackup(int progress) {
+								pd.setProgress(progress);
+							}
+							@Override
+							public void beforeBackup(int total) {
+								pd.setMax(total);
+							}
+						});
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					pd.dismiss();
+				};
+			}.start();
+		}
+		else {
+			Toast.makeText(this, "sd卡不可用", 0).show();
+		}
 	}
 }
