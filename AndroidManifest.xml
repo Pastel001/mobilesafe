@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dwl.mobilesafe"
+    android:installLocation="preferExternal"
     android:versionCode="3"
     android:versionName="3.0" >
 
@@ -21,11 +22,11 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
-    <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
 
     <application
         android:allowBackup="true"
@@ -73,6 +74,8 @@
         <activity android:name="com.dwl.mobilesafe.CommonNumberQueryActivity" >
         </activity>
         <activity android:name="com.dwl.mobilesafe.CallSmsSafeActivity" >
+        </activity>
+        <activity android:name="com.dwl.mobilesafe.AppManagementActivity" >
         </activity>
 
         <service android:name="com.dwl.mobilesafe.service.GPSService" >

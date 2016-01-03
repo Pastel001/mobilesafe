@@ -58,6 +58,10 @@ public class HomeActivity extends Activity {
 							CallSmsSafeActivity.class);
 					startActivity(intent);
 					break;
+				case 2:// 软件管理
+					intent = new Intent(HomeActivity.this, AppManagementActivity.class);
+					startActivity(intent);
+					break;
 				case 7:// 高级工具
 					intent = new Intent(HomeActivity.this, AtoolsActivity.class);
 					startActivity(intent);
