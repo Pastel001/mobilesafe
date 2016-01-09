@@ -77,6 +77,8 @@
         </activity>
         <activity android:name="com.dwl.mobilesafe.AppManagementActivity" >
         </activity>
+        <activity android:name="com.dwl.mobilesafe.TaskManagementActivity" >
+        </activity>
 
         <service android:name="com.dwl.mobilesafe.service.GPSService" >
         </service>

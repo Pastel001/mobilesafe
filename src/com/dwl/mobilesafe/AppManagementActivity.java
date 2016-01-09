@@ -43,6 +43,7 @@ import android.widget.Toast;
 
 import com.dwl.mobilesafe.dto.AppInfo;
 import com.dwl.mobilesafe.engine.AppInfoProvider;
+import com.dwl.mobilesafe.utils.SystemInfoUtils;
 
 public class AppManagementActivity extends Activity implements OnClickListener {
 	private static final String TAG = "AppManagementActivity";
@@ -79,11 +80,11 @@ public class AppManagementActivity extends Activity implements OnClickListener {
 		tv_rom = (TextView) findViewById(R.id.tv_rom);
 		tv_sdcard = (TextView) findViewById(R.id.tv_sdcard);
 		tv_rom.setText("手机内存可用："
-				+ getTotalSpace(Environment.getDataDirectory()
-						.getAbsolutePath()));
+				+ SystemInfoUtils.getTotalSpace(this, Environment
+						.getDataDirectory().getAbsolutePath()));
 		tv_sdcard.setText("SD卡可用："
-				+ getTotalSpace(Environment.getExternalStorageDirectory()
-						.getAbsolutePath()));
+				+ SystemInfoUtils.getTotalSpace(this, Environment
+						.getExternalStorageDirectory().getAbsolutePath()));
 		lv_apps = (ListView) findViewById(R.id.lv_apps);
 		ll_loading = (LinearLayout) findViewById(R.id.ll_loading);
 		tv_status = (TextView) findViewById(R.id.tv_status);
@@ -263,13 +264,6 @@ public class AppManagementActivity extends Activity implements OnClickListener {
 
 	}
 
-	private String getTotalSpace(String path) {
-		StatFs statFs = new StatFs(path);
-		long blocks = statFs.getAvailableBlocks();
-		long size = statFs.getBlockSize();
-		return Formatter.formatFileSize(this, blocks * size);
-	}
-
 	private void dismissPopupWindow() {
 		if (popupWindow != null && popupWindow.isShowing()) {
 			popupWindow.dismiss();
@@ -300,9 +294,10 @@ public class AppManagementActivity extends Activity implements OnClickListener {
 		PackageManager pm = getPackageManager();
 		String packageName = appInfo.getPackageName();
 		try {
-			PackageInfo packageInfo = pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);//不传入PackageManager.GET_ACTIVITIES，不能获取到Activitys
+			PackageInfo packageInfo = pm.getPackageInfo(packageName,
+					PackageManager.GET_ACTIVITIES);// 不传入PackageManager.GET_ACTIVITIES，不能获取到Activitys
 			ActivityInfo[] activityInfo = packageInfo.activities;
-			if (activityInfo[0]!=null&& activityInfo.length>0) {
+			if (activityInfo[0] != null && activityInfo.length > 0) {
 				ActivityInfo acInfo = activityInfo[0];
 				intent.setClassName(packageName, acInfo.name);
 				startActivity(intent);
@@ -319,7 +314,8 @@ public class AppManagementActivity extends Activity implements OnClickListener {
 		intent.setAction(intent.ACTION_SEND);
 		intent.addCategory(intent.CATEGORY_DEFAULT);
 		intent.setType("text/plain");
-		intent.putExtra(Intent.EXTRA_TEXT, "推荐使用一款软件，名称："+appInfo.getName()+"\n下载地址:http://www.hupu.com");
+		intent.putExtra(Intent.EXTRA_TEXT, "推荐使用一款软件，名称：" + appInfo.getName()
+				+ "\n下载地址:http://www.hupu.com");
 		startActivity(intent);
 	}
 
@@ -329,7 +325,7 @@ public class AppManagementActivity extends Activity implements OnClickListener {
 			intent.setAction(Intent.ACTION_DELETE);
 			intent.addCategory(Intent.CATEGORY_DEFAULT);
 			intent.setData(Uri.parse("package:" + appInfo.getPackageName()));
-			startActivityForResult(intent, 0);//卸載后需要刷新界面，所以使用startActivityForResult
+			startActivityForResult(intent, 0);// 卸載后需要刷新界面，所以使用startActivityForResult
 		} else {
 			Toast.makeText(this, "需要root权限，不能卸载", 0).show();
 		}
