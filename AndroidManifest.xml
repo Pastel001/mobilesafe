@@ -27,6 +27,7 @@
     <uses-permission android:name="android.permission.WRITE_CALL_LOG" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
 
     <application
         android:allowBackup="true"
@@ -83,6 +84,10 @@
         <service android:name="com.dwl.mobilesafe.service.GPSService" >
         </service>
         <service android:name="com.dwl.mobilesafe.service.AddressService" >
+        </service>
+        <service android:name="com.dwl.mobilesafe.service.CallSmsSafeService" >
+        </service>
+        <service android:name="com.dwl.mobilesafe.service.AutoKillProcessService" >
         </service>
 
         <receiver android:name="com.dwl.mobilesafe.receiver.BootCompleteReceiver" >

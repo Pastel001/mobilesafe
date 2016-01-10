@@ -146,8 +146,10 @@ public class SettingActivity extends Activity {
 			public void onClick(View v) {
 				if (siv_black_number.isChecked()) {
 					siv_black_number.setChecked(false);
+					stopService(callSmsSafeService);
 				} else {
 					siv_black_number.setChecked(true);
+					startService(callSmsSafeService);
 				}
 			}
 		});

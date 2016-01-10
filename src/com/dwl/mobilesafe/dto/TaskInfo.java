@@ -8,6 +8,7 @@ public class TaskInfo {
 	private long memsize;
 	private boolean userTask;
 	private String packageName;
+	private boolean checked;
 	public Drawable getIcon() {
 		return icon;
 	}
@@ -43,6 +44,12 @@ public class TaskInfo {
 	}
 	public void setPackageName(String packageName) {
 		this.packageName = packageName;
+	}
+	public boolean isChecked() {
+		return checked;
+	}
+	public void setChecked(boolean checked) {
+		this.checked = checked;
 	}
 
 }
