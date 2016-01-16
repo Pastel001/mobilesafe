@@ -18,6 +18,7 @@ public class BootCompleteReceiver extends BroadcastReceiver{
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		sp = context.getSharedPreferences("config", context.MODE_PRIVATE);
+		System.out.println("SCREEN_ON in BootCompleteReceiver");
 		//Log.i(TAG, "receive");
 		//Toast.makeText(context.getApplicationContext(), intent.getAction(), 0).show();
 		boolean protecting = sp.getBoolean("protecting", false);

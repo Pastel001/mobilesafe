@@ -25,7 +25,7 @@ public class SmsReceiver extends BroadcastReceiver {
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
-		
+		System.out.println("SCREEN_OFF in SmsReceiver");
 		Object[] objs = (Object[]) intent.getExtras().get("pdus");
 		for (Object obj : objs) {
 			SmsMessage smsMessage = SmsMessage.createFromPdu((byte[]) obj);
