@@ -67,7 +67,7 @@ public class UpdateWidgetService extends Service {
 		registerReceiver(onReceiver, onfilter);
 
 		IntentFilter offfilter = new IntentFilter();
-		onfilter.addAction(Intent.ACTION_SCREEN_OFF);
+		offfilter.addAction(Intent.ACTION_SCREEN_OFF);
 		registerReceiver(offReceiver, offfilter);
 
 		awm = AppWidgetManager.getInstance(this);
