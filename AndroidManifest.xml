@@ -28,6 +28,7 @@
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
 
     <application
         android:allowBackup="true"
@@ -80,6 +81,8 @@
         </activity>
         <activity android:name="com.dwl.mobilesafe.TaskManagementActivity" >
         </activity>
+        <activity android:name="com.dwl.mobilesafe.AppLockActivity" >
+        </activity>
 
         <service android:name="com.dwl.mobilesafe.service.GPSService" >
         </service>
@@ -90,6 +93,8 @@
         <service android:name="com.dwl.mobilesafe.service.AutoKillProcessService" >
         </service>
         <service android:name="com.dwl.mobilesafe.service.UpdateWidgetService" >
+        </service>
+        <service android:name="com.dwl.mobilesafe.service.WatchDogService" >
         </service>
 
         <receiver android:name="com.dwl.mobilesafe.receiver.BootCompleteReceiver" >

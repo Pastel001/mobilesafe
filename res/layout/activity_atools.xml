@@ -59,4 +59,16 @@
         android:gravity="center_vertical"
         android:onClick="smsRecovery"
         />
+    <TextView 
+        android:drawableLeft="@android:drawable/btn_star_big_on"
+        android:background="@drawable/button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:text="应用锁"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:onClick="appLock"
+        />
 </LinearLayout>

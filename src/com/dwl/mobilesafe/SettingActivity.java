@@ -2,24 +2,21 @@ package com.dwl.mobilesafe;
 
 import com.dwl.mobilesafe.service.AddressService;
 import com.dwl.mobilesafe.service.CallSmsSafeService;
+import com.dwl.mobilesafe.service.WatchDogService;
 import com.dwl.mobilesafe.ui.SettingClickView;
 import com.dwl.mobilesafe.ui.SettingItemView;
 import com.dwl.mobilesafe.utils.ServiceStatusUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.content.ComponentName;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.text.style.BulletSpan;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 
 public class SettingActivity extends Activity {
 
@@ -28,6 +25,7 @@ public class SettingActivity extends Activity {
 	private SettingClickView scv_change_bg;
 	private SettingClickView scv_change_postion;
 	private SettingItemView siv_black_number;
+	private SettingItemView siv_app_lock;
 	/**
 	 * 起始位置
 	 */
@@ -37,6 +35,7 @@ public class SettingActivity extends Activity {
 	private Editor editor;
 	private Intent showAddresService;
 	private Intent callSmsSafeService;
+	private Intent watchDogService;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +51,7 @@ public class SettingActivity extends Activity {
 		scv_change_bg = (SettingClickView) findViewById(R.id.scv_change_bg);
 		scv_change_postion = (SettingClickView) findViewById(R.id.scv_change_positon);
 		siv_black_number = (SettingItemView) findViewById(R.id.siv_black_number);
+		siv_app_lock = (SettingItemView) findViewById(R.id.siv_app_lock);
 		// 自动更新设置
 		if (update) {
 			siv_update.setChecked(true);
@@ -129,11 +129,12 @@ public class SettingActivity extends Activity {
 		scv_change_postion.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(SettingActivity.this,DragViewActivity.class);
+				Intent intent = new Intent(SettingActivity.this,
+						DragViewActivity.class);
 				startActivity(intent);
 			}
 		});
-		//黑名单拦截设置
+		// 黑名单拦截设置
 		if (ServiceStatusUtils.isServiceRunning(this,
 				"com.dwl.mobilesafe.service.CallSmsSafeService")) {
 			siv_black_number.setChecked(true);
@@ -150,6 +151,27 @@ public class SettingActivity extends Activity {
 				} else {
 					siv_black_number.setChecked(true);
 					startService(callSmsSafeService);
+				}
+			}
+		});
+		
+		// 程序锁拦截设置
+		if (ServiceStatusUtils.isServiceRunning(this,
+				"com.dwl.mobilesafe.service.WatchDogService")) {
+			siv_app_lock.setChecked(true);
+		} else {
+			siv_app_lock.setChecked(false);
+		}
+		watchDogService = new Intent(this, WatchDogService.class);
+		siv_app_lock.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (siv_app_lock.isChecked()) {
+					siv_app_lock.setChecked(false);
+					stopService(watchDogService);
+				} else {
+					siv_app_lock.setChecked(true);
+					startService(watchDogService);
 				}
 			}
 		});

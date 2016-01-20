@@ -95,4 +95,8 @@ public class AtoolsActivity extends Activity {
 			Toast.makeText(this, "sdø®≤ªø…”√", 0).show();
 		}
 	}
+	public void appLock(View view){
+		Intent intent = new Intent(this,AppLockActivity.class);
+		startActivity(intent);
+	}
 }

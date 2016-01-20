@@ -33,17 +33,26 @@
         android:id="@+id/scv_change_bg"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-    <com.dwl.mobilesafe.ui.SettingClickView
+
+    <com.dwl.mobilesafe.ui.SettingClickView
         android:id="@+id/scv_change_positon"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
-    
-     <com.dwl.mobilesafe.ui.SettingItemView
+
+    <com.dwl.mobilesafe.ui.SettingItemView
         android:id="@+id/siv_black_number"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         dwl:desc_off="黑名单拦截设置已经关闭"
         dwl:desc_on="黑名单拦截设置已经打开"
         dwl:title="黑名单拦截设置" />
+
+    <com.dwl.mobilesafe.ui.SettingItemView
+        android:id="@+id/siv_app_lock"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        dwl:desc_off="程序锁已经关闭"
+        dwl:desc_on="程序锁已经打开"
+        dwl:title="程序锁设置" />
 
 </LinearLayout>
