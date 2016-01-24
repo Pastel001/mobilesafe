@@ -136,19 +136,20 @@ public class AppLockActivity extends Activity {
 						ta.setDuration(500);
 						view.startAnimation(ta);
 					}
+					//延迟500ms在主线程执行notify
 					new Handler().postDelayed(new Runnable() {
 						@Override
 						public void run() {
 							notifyDataSetChanged();
 						}
 					}, 500);
-					/*try {
-						Thread.sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					notifyDataSetChanged();*/
+
+					/*
+					 * try { Thread.sleep(500); notifyDataSetChanged(); } catch
+					 * (InterruptedException e) { // TODO Auto-generated catch
+					 * block e.printStackTrace(); }
+					 */
+
 				}
 			});
 			return view;
