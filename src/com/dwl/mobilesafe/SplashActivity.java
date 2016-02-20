@@ -105,6 +105,7 @@ public class SplashActivity extends Activity {
 		// 初始化，拷贝数据库到fils目录
 		copyDB("address.db");
 		copyDB("commonnum.db");
+		copyDB("antivirus.db");
 		// 创建桌面快捷图标
 		creteDesktopShotcut();
 		if (update) {

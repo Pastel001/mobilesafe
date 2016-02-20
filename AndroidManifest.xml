@@ -85,8 +85,14 @@
         </activity>
         <activity
             android:name="com.dwl.mobilesafe.LockValidateActivity"
-            android:launchMode="singleInstance"
-            android:excludeFromRecents="true" >
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance" >
+        </activity>
+        <activity android:name="com.dwl.mobilesafe.TrafficManagerActivity" >
+        </activity>
+        <activity
+            android:name="com.dwl.mobilesafe.AntivirusActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
 
         <service android:name="com.dwl.mobilesafe.service.GPSService" >
