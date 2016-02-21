@@ -94,6 +94,8 @@
             android:name="com.dwl.mobilesafe.AntivirusActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" >
         </activity>
+        <activity android:name="com.dwl.mobilesafe.CleanCacheActivity" >
+        </activity>
 
         <service android:name="com.dwl.mobilesafe.service.GPSService" >
         </service>
