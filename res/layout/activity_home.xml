@@ -11,22 +11,28 @@
         android:gravity="center"
         android:text="功能列表"
         android:textSize="20sp" />
-	<com.dwl.mobilesafe.ui.FocusedTextView 
-	    android:layout_width="fill_parent"
+
+    <com.dwl.mobilesafe.ui.FocusedTextView
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:singleLine="true"
         android:ellipsize="marquee"
-        android:text="我是您的手机安全小卫士，我时刻保护您的手机安全，嘎嘎嘎，呱呱呱！！！"
-	    />
-	
+        android:singleLine="true"
+        android:text="我是您的手机安全小卫士，我时刻保护您的手机安全，嘎嘎嘎，呱呱呱！！！" />
+
     <GridView
         android:id="@+id/gv_home"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dip"
-        android:verticalSpacing="15dip"
         android:numColumns="3"
-         >
+        android:verticalSpacing="15dip" >
     </GridView>
+
+    <LinearLayout
+        android:id="@+id/ll_container"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+    </LinearLayout>
 
 </LinearLayout>

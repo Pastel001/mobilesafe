@@ -4,19 +4,36 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="55dip"
-        android:background="#00ff00"
-        android:gravity="center"
-        android:text="清理缓存"
-        android:textSize="20sp" />
-	<TextView
-	    android:id="@+id/tv_scan_status"
+        android:layout_height="55dip" >
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="fill_parent"
+            android:layout_height="55dip"
+            android:background="#00ff00"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:text="清理缓存"
+            android:textSize="20sp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:onClick="clearAll"
+            android:src="@drawable/btn_selector"
+            android:text="全部清理" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_scan_status"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="扫描缓存"/>
+        android:text="扫描缓存" />
+
     <ProgressBar
         android:id="@+id/progressBar1"
         style="?android:attr/progressBarStyleHorizontal"
@@ -24,11 +41,16 @@
         android:layout_height="wrap_content"
         android:progressDrawable="@drawable/progress_horizontal" />
 
-    <LinearLayout
-        android:id="@+id/ll_container"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical" >
-    </LinearLayout>
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/ll_container"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

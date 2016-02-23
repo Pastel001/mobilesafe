@@ -1,5 +1,9 @@
 package com.dwl.mobilesafe;
 
+import net.youmi.android.AdManager;
+import net.youmi.android.banner.AdSize;
+import net.youmi.android.banner.AdView;
+
 import com.dwl.mobilesafe.utils.Md5utils;
 
 import android.app.Activity;
@@ -21,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +48,13 @@ public class HomeActivity extends Activity {
 		sp = getSharedPreferences("config", MODE_PRIVATE);
 		gv_home = (GridView) findViewById(R.id.gv_home);
 		gv_home.setAdapter(new HomeAdapter());
+		// 初始化接口，应用启动的时候调用
+		// 参数：appId, appSecret, 调试模式
+		AdManager.getInstance(this).init("73057fb81878f2ba",
+				"f2707618edb7c2a4", false);
+		LinearLayout ll_container = (LinearLayout) findViewById(R.id.ll_container);
+		AdView adView = new AdView(this, AdSize.FIT_SCREEN);
+		ll_container.addView(adView);
 		gv_home.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -59,23 +71,28 @@ public class HomeActivity extends Activity {
 					startActivity(intent);
 					break;
 				case 2:// 软件管理
-					intent = new Intent(HomeActivity.this, AppManagementActivity.class);
+					intent = new Intent(HomeActivity.this,
+							AppManagementActivity.class);
 					startActivity(intent);
 					break;
 				case 3:// 程序管理
-					intent = new Intent(HomeActivity.this, TaskManagementActivity.class);
+					intent = new Intent(HomeActivity.this,
+							TaskManagementActivity.class);
 					startActivity(intent);
 					break;
 				case 4:// 流量统计
-					intent = new Intent(HomeActivity.this, TrafficManagerActivity.class);
+					intent = new Intent(HomeActivity.this,
+							TrafficManagerActivity.class);
 					startActivity(intent);
 					break;
 				case 5:// 病毒查杀
-					intent = new Intent(HomeActivity.this, AntivirusActivity.class);
+					intent = new Intent(HomeActivity.this,
+							AntivirusActivity.class);
 					startActivity(intent);
 					break;
 				case 6:// 清理缓存
-					intent = new Intent(HomeActivity.this, CleanCacheActivity.class);
+					intent = new Intent(HomeActivity.this,
+							CleanCacheActivity.class);
 					startActivity(intent);
 					break;
 				case 7:// 高级工具
